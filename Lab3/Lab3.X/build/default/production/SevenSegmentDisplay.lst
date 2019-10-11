@@ -1,0 +1,666 @@
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; DIGIT DEFS
+                      00002 #DEFINE VAL_DIGIT_ZERO 0xC0
+                      00003 #DEFINE VAL_DIGIT_ONE 0xF9
+                      00004 #DEFINE VAL_DIGIT_TWO 0xA4
+                      00005 #DEFINE VAL_DIGIT_THREE 0xB0
+                      00006 #DEFINE VAL_DIGIT_FOUR 0x99
+                      00007 #DEFINE VAL_DIGIT_FIVE 0x92
+                      00008 #DEFINE VAL_DIGIT_SIX 0x82
+                      00009 #DEFINE VAL_DIGIT_SEVEN 0xF8
+                      00010 #DEFINE VAL_DIGIT_EIGHT 0x80
+                      00011 #DEFINE VAL_DIGIT_NINE 0x98
+                      00012     
+                      00013 #DEFINE VAL_FIRST_DIGIT_POS 0x3E
+                      00014 #DEFINE VAL_SECOND_DIGIT_POS 0x3D
+                      00015 #DEFINE VAL_THIRD_DIGIT_POS 0x3B
+                      00016 #DEFINE VAL_FOURTH_DIGIT_POS 0x37
+                      00017 #DEFINE VAL_FIFTH_DIGIT_POS 0x2F
+                      00018 #DEFINE VAL_SIXTH_DIGIT_POS 0x1F
+                      00019 
+                      00020 #DEFINE MEM_DIGIT_START 0x30
+                      00021 #DEFINE MEM_DIGIT MEM_DIGIT_START + 10
+                      00022 #DEFINE MEM_INNER_DELAY MEM_DIGIT_START + 11
+                      00023 #DEFINE VAL_INNER_DELAY 0xFF
+                      00024 #DEFINE MEM_OUTER_DELAY MEM_DIGIT_START + 12
+                      00025 #DEFINE VAL_OUTER_DELAY 0x04
+                      00026 
+                      00027 #DEFINE MEM_DIGIT_POS_START MEM_DIGIT_START + 13
+                      00028 #DEFINE MEM_DIGIT_POS MEM_DIGIT_POS_START + 6
+                      00029     
+                      00030 #INCLUDE<P16F877A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Mar 17 2019
+                      00005 ;  MPASM PIC16F877A processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00567         LIST
+2007   1832           00031     __CONFIG _DEBUG_OFF&_CP_ALL&_WRT_HALF&_CPD_ON&_LVP_OFF&_BODEN_OFF&_PWRTE_ON&_WDT_OFF&_HS_OSC
+                      00032     ORG 00H    
+0000                  00033 MAIN: 
+0000   2???           00034     CALL CONFIGURE_MEMORY
+                      00035     
+0001   1683           00036     BSF STATUS, RP0 ; SELECT BANK 1
+0002   1303           00037     BCF STATUS, RP1
+                      00038 
+0003   3006           00039     MOVLW 06H ; SET OUTS TO DIGITAL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   009F           00040     MOVWF ADCON1
+                      00041 
+0005   30C0           00042     MOVLW B'11000000' ; SET FIRST SIX PORTS TO OUTPUT
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   0085           00043     MOVWF TRISA 
+                      00044 
+                      00045     ; SEGMENTS
+0007   3000           00046     MOVLW 00H ; SET ALL PINS TO OUTPUT
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0088           00047     MOVWF TRISD
+                      00048 
+0009   1283           00049     BCF STATUS, RP0 ; SELECT BANK
+000A   1303           00050     BCF STATUS, RP1
+                      00051     
+000B   2???           00052     GOTO LOOP
+                      00053     
+000C                  00054 SET_POS:
+000C   3043           00055     MOVLW MEM_DIGIT_POS_START
+000D   0749           00056     ADDWF MEM_DIGIT_POS, W
+000E   0084           00057     MOVWF FSR
+000F   0800           00058     MOVF INDF, W
+0010   0085           00059     MOVWF PORTA
+0011   0008           00060     RETURN
+                      00061     
+0012                  00062 SET_DIGIT:
+0012   3030           00063     MOVLW MEM_DIGIT_START
+0013   0740           00064     ADDWF MEM_DIGIT, W
+0014   0084           00065     MOVWF FSR
+0015   0800           00066     MOVF INDF, W
+0016   0088           00067     MOVWF PORTD
+0017   0008           00068     RETURN
+                      00069     
+0018                  00070 DELAY:
+0018   3004           00071     MOVLW VAL_OUTER_DELAY
+0019   00C2           00072     MOVWF MEM_OUTER_DELAY
+                      00073     
+001A                  00074 OUTER_DELAY_LOOP:
+001A   30FF           00075     MOVLW VAL_INNER_DELAY
+001B   00C1           00076     MOVWF MEM_INNER_DELAY
+                      00077 
+001C                  00078 INNER_DELAY_LOOP:
+001C   0BC1           00079     DECFSZ MEM_INNER_DELAY, F
+001D   2???           00080     GOTO INNER_DELAY_LOOP
+                      00081     
+001E   0BC2           00082     DECFSZ MEM_OUTER_DELAY, F
+001F   2???           00083     GOTO OUTER_DELAY_LOOP
+0020   0008           00084     RETURN
+                      00085     
+0021                  00086 CONFIGURE_MEMORY:
+0021   1283           00087     BCF STATUS, RP0 ; SELECT BANK 0
+0022   1303           00088     BCF STATUS, RP1
+                      00089        
+                      00090     ; MOVE ALL DIGITS INTO MEMORY
+0023   3000           00091     MOVLW 0x00
+0024   00C0           00092     MOVWF MEM_DIGIT
+                      00093     
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0025   30C0           00094     MOVLW VAL_DIGIT_ZERO
+0026   00B0           00095     MOVWF MEM_DIGIT_START
+                      00096     
+0027   30F9           00097     MOVLW VAL_DIGIT_ONE
+0028   00B1           00098     MOVWF MEM_DIGIT_START + 1
+                      00099     
+0029   30A4           00100     MOVLW VAL_DIGIT_TWO
+002A   00B2           00101     MOVWF MEM_DIGIT_START + 2
+                      00102     
+002B   30B0           00103     MOVLW VAL_DIGIT_THREE
+002C   00B3           00104     MOVWF MEM_DIGIT_START + 3
+                      00105     
+002D   3099           00106     MOVLW VAL_DIGIT_FOUR
+002E   00B4           00107     MOVWF MEM_DIGIT_START + 4
+                      00108     
+002F   3092           00109     MOVLW VAL_DIGIT_FIVE
+0030   00B5           00110     MOVWF MEM_DIGIT_START + 5
+                      00111     
+0031   3082           00112     MOVLW VAL_DIGIT_SIX
+0032   00B6           00113     MOVWF MEM_DIGIT_START + 6
+                      00114     
+0033   30F8           00115     MOVLW VAL_DIGIT_SEVEN
+0034   00B7           00116     MOVWF MEM_DIGIT_START + 7
+                      00117     
+0035   3080           00118     MOVLW VAL_DIGIT_EIGHT
+0036   00B8           00119     MOVWF MEM_DIGIT_START + 8
+                      00120     
+0037   3098           00121     MOVLW VAL_DIGIT_NINE
+0038   00B9           00122     MOVWF MEM_DIGIT_START + 9
+                      00123     
+0039   3000           00124     MOVLW 0x00
+003A   00C9           00125     MOVWF MEM_DIGIT_POS
+                      00126     
+003B   303E           00127     MOVLW VAL_FIRST_DIGIT_POS
+003C   00C3           00128     MOVWF MEM_DIGIT_POS_START
+                      00129     
+003D   303D           00130     MOVLW VAL_SECOND_DIGIT_POS
+003E   00C4           00131     MOVWF MEM_DIGIT_POS_START + 1
+                      00132     
+003F   303B           00133     MOVLW VAL_THIRD_DIGIT_POS
+0040   00C5           00134     MOVWF MEM_DIGIT_POS_START + 2
+                      00135     
+0041   3037           00136     MOVLW VAL_FOURTH_DIGIT_POS
+0042   00C6           00137     MOVWF MEM_DIGIT_POS_START + 3
+                      00138     
+0043   302F           00139     MOVLW VAL_FIFTH_DIGIT_POS
+0044   00C7           00140     MOVWF MEM_DIGIT_POS_START + 4
+                      00141     
+0045   301F           00142     MOVLW VAL_SIXTH_DIGIT_POS
+0046   00C8           00143     MOVWF MEM_DIGIT_POS_START + 5
+                      00144     
+0047   0008           00145     RETURN
+                      00146     
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0048                  00147 LOOP:
+0048   3000           00148     MOVLW 0x00
+0049   00C9           00149     MOVWF MEM_DIGIT_POS
+004A   2???           00150     CALL SET_POS
+004B   3001           00151     MOVLW 0x01
+004C   00C0           00152     MOVWF MEM_DIGIT
+004D   2???           00153     CALL SET_DIGIT
+004E   2???           00154     CALL DELAY
+                      00155     
+004F   3001           00156     MOVLW 0x01
+0050   00C9           00157     MOVWF MEM_DIGIT_POS
+0051   2???           00158     CALL SET_POS
+0052   3002           00159     MOVLW 0x02
+0053   00C0           00160     MOVWF MEM_DIGIT
+0054   2???           00161     CALL SET_DIGIT
+0055   2???           00162     CALL DELAY
+                      00163     
+0056   3002           00164     MOVLW 0x02
+0057   00C9           00165     MOVWF MEM_DIGIT_POS
+0058   2???           00166     CALL SET_POS
+0059   3003           00167     MOVLW 0x03
+005A   00C0           00168     MOVWF MEM_DIGIT
+005B   2???           00169     CALL SET_DIGIT
+005C   2???           00170     CALL DELAY
+                      00171     
+005D   3003           00172     MOVLW 0x03
+005E   00C9           00173     MOVWF MEM_DIGIT_POS
+005F   2???           00174     CALL SET_POS
+0060   3004           00175     MOVLW 0x04
+0061   00C0           00176     MOVWF MEM_DIGIT
+0062   2???           00177     CALL SET_DIGIT
+0063   2???           00178     CALL DELAY
+                      00179     
+0064   3004           00180     MOVLW 0x04
+0065   00C9           00181     MOVWF MEM_DIGIT_POS
+0066   2???           00182     CALL SET_POS
+0067   3005           00183     MOVLW 0x05
+0068   00C0           00184     MOVWF MEM_DIGIT
+0069   2???           00185     CALL SET_DIGIT
+006A   2???           00186     CALL DELAY
+                      00187     
+006B   3005           00188     MOVLW 0x05
+006C   00C9           00189     MOVWF MEM_DIGIT_POS
+006D   2???           00190     CALL SET_POS
+006E   3006           00191     MOVLW 0x06
+006F   00C0           00192     MOVWF MEM_DIGIT
+0070   2???           00193     CALL SET_DIGIT
+0071   2???           00194     CALL DELAY
+                      00195     
+0072   2???           00196     GOTO LOOP
+1832                  00197     END
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CONFIGURE_MEMORY                  00000021
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DELAY                             00000018
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INNER_DELAY_LOOP                  0000001C
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IRP                               00000007
+LOOP                              00000048
+MAIN                              00000000
+MEM_DIGIT                         MEM_DIGIT_START + 10
+MEM_DIGIT_POS                     MEM_DIGIT_POS_START + 6
+MEM_DIGIT_POS_START               MEM_DIGIT_START + 13
+MEM_DIGIT_START                   0x30
+MEM_INNER_DELAY                   MEM_DIGIT_START + 11
+MEM_OUTER_DELAY                   MEM_DIGIT_START + 12
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+OUTER_DELAY_LOOP                  0000001A
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+R_W                               00000002
+S                                 00000003
+SEN                               00000000
+SET_DIGIT                         00000012
+SET_POS                           0000000C
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+VAL_DIGIT_EIGHT                   0x80
+VAL_DIGIT_FIVE                    0x92
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+VAL_DIGIT_FOUR                    0x99
+VAL_DIGIT_NINE                    0x98
+VAL_DIGIT_ONE                     0xF9
+VAL_DIGIT_SEVEN                   0xF8
+VAL_DIGIT_SIX                     0x82
+VAL_DIGIT_THREE                   0xB0
+VAL_DIGIT_TWO                     0xA4
+VAL_DIGIT_ZERO                    0xC0
+VAL_FIFTH_DIGIT_POS               0x2F
+VAL_FIRST_DIGIT_POS               0x3E
+VAL_FOURTH_DIGIT_POS              0x37
+VAL_INNER_DELAY                   0xFF
+VAL_OUTER_DELAY                   0x04
+VAL_SECOND_DIGIT_POS              0x3D
+VAL_SIXTH_DIGIT_POS               0x1F
+VAL_THIRD_DIGIT_POS               0x3B
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+MPASM 5.84           SEVENSEGMENTDISPLAY.ASM   10-11-2019  15:38:27         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     3 reported,     0 suppressed
+
+
