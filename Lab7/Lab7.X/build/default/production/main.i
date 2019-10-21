@@ -1779,32 +1779,85 @@ __attribute__((inline)) uchar GetHighNibble(uchar* val)
     return (*val & 0xF0) >> 4;
 }
 
-void SetColumnHigh(uchar col)
+__attribute__((inline)) void SetLowNibble(uchar* val, uchar newVal)
 {
-    ClearLowNibble(&PORTC);
-    SetBitHigh(&PORTC, col);
+    *val = (*val & 0xF0) | newVal;
 }
 
-uchar ReadMatrixColumn(uchar col)
+__attribute__((inline)) void SetHighNibble(uchar* val, uchar newVal)
 {
-    PORTC = 0;
-    TRISC = 0b11110000;
-    SetColumnHigh(col);
-    return GetHighNibble(&PORTC);
+    *val = (*val & 0x0F) | newVal << 4;
+}
+# 80 "main.c"
+void delay(){int i;for(i=0;i<5000;i++);}
+
+__attribute__((inline)) void WriteCommand(uchar cmd)
+{
+    TRISD = 0x00;
+    RA1 = 0;
+    RA2 = 0;
+    PORTD = cmd;
+    RA3 = 0;
+    delay();
+    RA3 = 1;
+    PORTD = 0;
+}
+__attribute__((inline)) void SetDisplayMode(bool displayOn, bool cursorOn, bool cursorBlink)
+{
+    WriteCommand(0b00001000 | displayOn << 2 | cursorOn << 1 | cursorBlink);
 }
 
-void SetRowHigh(uchar row)
+
+__attribute__((inline)) void SetDisplayResolution(bool displayTwoLines, bool displayLargeFont)
 {
-    ClearLowNibble(&PORTC);
-    SetBitHigh(&PORTC, row + 4);
+    WriteCommand(0b00110000 | displayTwoLines << 3 | displayLargeFont << 2);
 }
 
-uchar ReadMatrixRow(uchar row)
+__attribute__((inline)) void ClearDisplay()
 {
-    PORTC = 0;
-    TRISC = 0b00001111;
-    SetRowHigh(row);
-    return GetLowNibble(&PORTC);
+    WriteCommand(0x1);
+}
+
+void ShiftCursor(bool right)
+{
+    WriteCommand(0b00010000 | right << 2);
+}
+
+void ShiftDisplay(bool right)
+{
+    WriteCommand(0b00011000 | right << 2);
+}
+
+__attribute__((inline)) void MoveCursorToStart()
+{
+    WriteCommand(0x02);
+}
+
+void SetDdramAddress(uchar addr)
+{
+    WriteCommand(0b10000000 | addr);
+}
+
+__attribute__((inline)) void SetCursorPosition(bool secondLine, uchar pos)
+{
+    MoveCursorToStart();
+    if (pos > 39)
+        pos = 39;
+
+    if (secondLine)
+        pos += 40;
+
+    SetDdramAddress(pos);
+}
+
+__attribute__((inline)) void WriteCharacter(char c)
+{
+    RA1 = 1;
+    RA2 = 0;
+    PORTD = c;
+    RA3 = 0;
+    delay();
+    RA3 = 1;
 }
 
 __attribute__((inline)) void Initialise();
@@ -1812,21 +1865,17 @@ void main(void)
 {
     Initialise();
 
-    uchar i;
+    SetDisplayMode(1, 1, 1);
+    ClearDisplay();
+    SetDisplayResolution(1, 0);
+    WriteCharacter('a');
+    WriteCharacter('b');
+    ShiftCursor(1);
+    WriteCharacter('c');
+    SetCursorPosition(1, 0);
     while (1)
     {
-        for (i = 0; i < 4; i++)
-        {
-            PORTA = 0;
-            PORTB = 0;
-            uchar res = ReadMatrixColumn(i);
-
-            res &= ReadMatrixRow(i);
-            PORTA = res;
-
-            if (PORTA > 0)
-                SetBitHigh(&PORTB, i);
-        }
+        SetDisplayMode(1, 1, 1);
     }
 
     return;
@@ -1835,12 +1884,9 @@ void main(void)
 __attribute__((inline)) void Initialise()
 {
 
-    ADCON1 = 0b00000110;
-    TRISA = 0b11110000;
-    TRISB = 0b11110000;
-    TRISC = 0b11110000;
-    TRISA = 0x00;
+    ADCON1 = 0x07;
+    TRISA = 0b00000000;
+    TRISD = 0b00000000;
     PORTA = 0x00;
-    PORTB = 0x00;
-    PORTC = 0x00;
+    PORTD = 0x00;
 }

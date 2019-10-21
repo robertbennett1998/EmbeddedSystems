@@ -56,68 +56,125 @@ inline uchar GetHighNibble(uchar* val)
     return (*val & 0xF0) >> 4;
 }
 
-void SetColumnHigh(uchar col)
+inline void SetLowNibble(uchar* val, uchar newVal)
 {
-    ClearLowNibble(&PORTC);
-    SetBitHigh(&PORTC, col);
+    *val = (*val & 0xF0) | newVal;
 }
 
-uchar ReadMatrixColumn(uchar col)
+inline void SetHighNibble(uchar* val, uchar newVal)
 {
-    PORTC = 0;
-    TRISC = 0b11110000;
-    SetColumnHigh(col);  
-    return GetHighNibble(&PORTC);
+    *val = (*val & 0x0F) | newVal << 4;
 }
 
-void SetRowHigh(uchar row)
+#define RS RA1
+#define RW RA2
+#define Enable RA3
+
+/*
+ * RS - RA1 - High for data input - Low for instruction
+ * RW - RA2 - High is read - Low is write
+ * Enable RA3
+ * Data: RD0 - RD7 (RD4 - RD7 is used for 4 bit)
+ */
+
+void delay(){int i;for(i=0;i<5000;i++);}
+
+inline void WriteCommand(uchar cmd)
 {
-    ClearLowNibble(&PORTC);
-    SetBitHigh(&PORTC, row + 4);
+    TRISD = 0x00;
+    RS = 0;
+    RW = 0; 
+    PORTD = cmd;   
+    Enable = 0;
+    delay();
+    Enable = 1;
+    PORTD = 0;
+}
+inline void SetDisplayMode(bool displayOn, bool cursorOn, bool cursorBlink)
+{
+    WriteCommand(0b00001000 | displayOn << 2 | cursorOn << 1 | cursorBlink);  
 }
 
-uchar ReadMatrixRow(uchar row)
+//If display two lines is true, display large font will be ignored
+inline void SetDisplayResolution(bool displayTwoLines, bool displayLargeFont)
 {
-    PORTC = 0;
-    TRISC = 0b00001111;
-    SetRowHigh(row);  
-    return GetLowNibble(&PORTC);
+    WriteCommand(0b00110000 | displayTwoLines << 3 | displayLargeFont << 2);
+}
+
+inline void ClearDisplay()
+{
+    WriteCommand(0x1);
+}
+
+void ShiftCursor(bool right)
+{
+    WriteCommand(0b00010000 | right << 2);
+}
+
+void ShiftDisplay(bool right)
+{
+    WriteCommand(0b00011000 | right << 2);
+}
+
+inline void MoveCursorToStart()
+{
+    WriteCommand(0x02);
+}
+
+void SetDdramAddress(uchar addr)
+{
+    WriteCommand(0b10000000 | addr);
+}
+
+inline void SetCursorPosition(bool secondLine, uchar pos)
+{
+    MoveCursorToStart();
+    if (pos > 39)
+        pos = 39;
+    
+    if (secondLine)
+        pos += 40;
+    
+    SetDdramAddress(pos);
+}
+
+inline void WriteCharacter(char c)
+{
+    RS = 1;
+    RW = 0;
+    PORTD = c;
+    Enable = 0;
+    delay();
+    Enable = 1;
 }
 
 inline void Initialise();   
 void main(void)
 {
     Initialise();
-    
-    uchar i;
+
+    SetDisplayMode(true, true, true);  
+    ClearDisplay();
+    SetDisplayResolution(true, false);
+    WriteCharacter('a');
+    WriteCharacter('b');
+    ShiftCursor(true);
+    WriteCharacter('c');
+    SetCursorPosition(true, 0);
     while (true)
     {
-        for (i = 0; i < 4; i++)
-        {
-            PORTA = 0;
-            PORTB = 0;
-            uchar res = ReadMatrixColumn(i); 
-            
-            res &= ReadMatrixRow(i);
-            PORTA = res;
-            
-            if (PORTA > 0)
-                SetBitHigh(&PORTB, i);
-        }
+        SetDisplayMode(true, true, true);
     }
-    
+        
     return;
 }
 
 inline void Initialise()
 {
     // 1: input 0: output
-    ADCON1 = 0b00000110; //set all pins to digital (port a)
-    TRISA = 0b11110000;
-    TRISB = 0b11110000;
-    TRISC = 0b11110000; // set 0-4 AS INPUT and 4-7 as OUTPUT
-    TRISA = 0x00;
+    ADCON1 = 0x07;
+    TRISA = 0b00000000;
+    TRISD = 0b00000000;
     PORTA = 0x00;
-    PORTB = 0x00;
-    PORTC = 0x00;
+    PORTD = 0x00;
 }

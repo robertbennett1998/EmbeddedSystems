@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.10\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\Lab7.X.production.sym \
   --cmf=dist/default/production\Lab7.X.production.cmf -z -Q16F877A \
-  -oC:\Users\rober\AppData\Local\Temp\s1js.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\rober\AppData\Local\Temp\s80g.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Lab7.X.production.map -E1 -ver=XC8 --acfsm=1493 \
   -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh \
   -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -pfunctab=ENTRY -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k C:\Users\rober\AppData\Local\Temp\s1js.o \
+  -DENTRY=2 -k C:\Users\rober\AppData\Local\Temp\s80g.o \
   dist/default/production\Lab7.X.production.o 
 
 Object code version is 3.11
@@ -28,22 +28,24 @@ Machine type is 16F877A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\rober\AppData\Local\Temp\s1js.o
+C:\Users\rober\AppData\Local\Temp\s80g.o
                 end_init                              0        0        3        0       0
                 config                             2007     2007        1     400E       0
 dist/default/production\Lab7.X.production.o
                 cinit                               7FC      7FC        4      FF8       0
-                text9                               737      737       11      E6E       0
-                text8                               717      717       10      E2E       0
-                text7                               727      727       10      E4E       0
-                text6                               748      748       13      E90       0
-                text5                               75B      75B       18      EB6       0
-                text4                               773      773       18      EE6       0
-                text3                               70F      70F        8      E1E       0
-                text2                               7A3      7A3       19      F46       0
-                text1                               78B      78B       18      F16       0
-                maintext                            7BC      7BC       40      F78       0
-                cstackCOMMON                         70       70        B       70       1
+                text11                              747      747       16      E8E       0
+                text10                              732      732       15      E64       0
+                text9                               6ED      6ED        7      DDA       0
+                text8                               704      704        B      E08       0
+                text7                               6F4      6F4        7      DE8       0
+                text6                               6FB      6FB        9      DF6       0
+                text5                               794      794       20      F28       0
+                text4                               778      778       1C      EF0       0
+                text3                               75D      75D       1B      EBA       0
+                text2                               720      720       12      E40       0
+                text1                               70F      70F       11      E1E       0
+                maintext                            7B4      7B4       48      F68       0
+                cstackCOMMON                         70       70        8       70       1
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -51,16 +53,18 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                              0        0        3         0
                 cinit                               7FC      7FC        4         0
-                text9                               737      737       11         0
-                text8                               717      717       10         0
-                text7                               727      727       10         0
-                text6                               748      748       13         0
-                text5                               75B      75B       18         0
-                text4                               773      773       18         0
-                text3                               70F      70F        8         0
-                text2                               7A3      7A3       19         0
-                text1                               78B      78B       18         0
-                maintext                            7BC      7BC       40         0
+                text11                              747      747       16         0
+                text10                              732      732       15         0
+                text9                               6ED      6ED        7         0
+                text8                               704      704        B         0
+                text7                               6F4      6F4        7         0
+                text6                               6FB      6FB        9         0
+                text5                               794      794       20         0
+                text4                               778      778       1C         0
+                text3                               75D      75D       1B         0
+                text2                               720      720       12         0
+                text1                               70F      70F       11         0
+                maintext                            7B4      7B4       48         0
 
         CLASS   STRCODE        
 
@@ -71,7 +75,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   ENTRY          
 
         CLASS   COMMON         
-                cstackCOMMON                         70       70        B         1
+                cstackCOMMON                         70       70        8         1
 
         CLASS   BANK0          
 
@@ -106,17 +110,19 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000003  000003         0       0  CODE        2
-                cstackCOMMON                   000070  00000B  00007B        70       1  COMMON      1
-                text3                          00070F  000008  000717       E1E       0  CODE        2
-                text8                          000717  000010  000727       E2E       0  CODE        2
-                text7                          000727  000010  000737       E4E       0  CODE        2
-                text9                          000737  000011  000748       E6E       0  CODE        2
-                text6                          000748  000013  00075B       E90       0  CODE        2
-                text5                          00075B  000018  000773       EB6       0  CODE        2
-                text4                          000773  000018  00078B       EE6       0  CODE        2
-                text1                          00078B  000018  0007A3       F16       0  CODE        2
-                text2                          0007A3  000019  0007BC       F46       0  CODE        2
-                maintext                       0007BC  000040  0007FC       F78       0  CODE        2
+                cstackCOMMON                   000070  000008  000078        70       1  COMMON      1
+                text9                          0006ED  000007  0006F4       DDA       0  CODE        2
+                text7                          0006F4  000007  0006FB       DE8       0  CODE        2
+                text6                          0006FB  000009  000704       DF6       0  CODE        2
+                text8                          000704  00000B  00070F       E08       0  CODE        2
+                text1                          00070F  000011  000720       E1E       0  CODE        2
+                text2                          000720  000012  000732       E40       0  CODE        2
+                text10                         000732  000015  000747       E64       0  CODE        2
+                text11                         000747  000016  00075D       E8E       0  CODE        2
+                text3                          00075D  00001B  000778       EBA       0  CODE        2
+                text4                          000778  00001C  000794       EF0       0  CODE        2
+                text5                          000794  000020  0007B4       F28       0  CODE        2
+                maintext                       0007B4  000048  0007FC       F68       0  CODE        2
                 cinit                          0007FC  000004  000800       FF8       0  CODE        2
                 config                         002007  000001  002008      400E       0  CONFIG      2
 
@@ -128,13 +134,13 @@ UNUSED ADDRESS RANGES
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01EF             60           1
-        CODE             0003-070E            70C           2
+        CODE             0003-06EC            6EA           2
                          0800-1FFF            800
-        COMMON           007B-007D              3           1
-        CONST            0003-070E            100           2
+        COMMON           0078-007D              6           1
+        CONST            0003-06EC            100           2
                          0800-1FFF            100
         EEDATA           2100-21FF            100           2
-        ENTRY            0003-070E            100           2
+        ENTRY            0003-06EC            100           2
                          0800-1FFF            100
         IDLOC            2000-2003              4           2
         RAM              0020-006F             50           1
@@ -146,212 +152,224 @@ UNUSED ADDRESS RANGES
         SFR2             0100-010F             10           1
         SFR3             0180-018F             10           1
         STACK            0110-016F             60           1
-        STRCODE          0003-070E            70C           2
+        STRCODE          0003-06EC            6EA           2
                          0800-1FFF           1800
-        STRING           0003-070E            100           2
+        STRING           0003-06EC            100           2
                          0800-1FFF            100
 
                                   Symbol Table
 
-ClearLowNibble@val         cstackCOMMON 0070
-GetHighNibble@val          cstackCOMMON 0070
-GetLowNibble@val           cstackCOMMON 0070
-ReadMatrixColumn@col       cstackCOMMON 0077
-ReadMatrixRow@row          cstackCOMMON 0077
-SetBitHigh@byBitOffset     cstackCOMMON 0072
-SetBitHigh@byValue         cstackCOMMON 0070
-SetColumnHigh@col          cstackCOMMON 0076
-SetRowHigh@row             cstackCOMMON 0076
-_ADCON1                    (abs)        009F
-_ClearLowNibble            text7        0727
-_GetHighNibble             text8        0717
-_GetLowNibble              text3        070F
-_Initialise                text9        0737
-_PORTA                     (abs)        0005
-_PORTB                     (abs)        0006
-_PORTC                     (abs)        0007
-_ReadMatrixColumn          text4        0773
-_ReadMatrixRow             text1        078B
-_SetBitHigh                text6        0748
-_SetColumnHigh             text5        075B
-_SetRowHigh                text2        07A3
-_TRISA                     (abs)        0085
-_TRISB                     (abs)        0086
-_TRISC                     (abs)        0087
-__CFG_BOREN$OFF            (abs)        0000
-__CFG_FOSC$HS              (abs)        0000
-__CFG_LVP$OFF              (abs)        0000
-__CFG_PWRTE$ON             (abs)        0000
-__CFG_WDTE$OFF             (abs)        0000
-__Habs1                    abs1         0000
-__Hbank0                   bank0        0000
-__Hbank1                   bank1        0000
-__Hbank2                   bank2        0000
-__Hbank3                   bank3        0000
-__Hcinit                   cinit        0800
-__Hclrtext                 clrtext      0000
-__Hcode                    code         0000
-__Hcommon                  common       0000
-__Hconfig                  config       2008
-__HcstackCOMMON            cstackCOMMON 0000
-__Heeprom_data             eeprom_data  0000
-__Hend_init                end_init     0003
-__Hfunctab                 functab      0000
-__Hidloc                   idloc        0000
-__Hinit                    init         0000
-__Hintentry                intentry     0000
-__Hmaintext                maintext     0000
-__Hpowerup                 powerup      0000
-__Hram                     ram          0000
-__Hreset_vec               reset_vec    0000
-__Hsfr0                    sfr0         0000
-__Hsfr1                    sfr1         0000
-__Hsfr2                    sfr2         0000
-__Hsfr3                    sfr3         0000
-__Hspace_0                 (abs)        2008
-__Hspace_1                 (abs)        007B
-__Hspace_2                 (abs)        0000
-__Hspace_3                 (abs)        0000
-__Hstack                   stack        0000
-__Hstrings                 strings      0000
-__Htext                    text         0000
-__Labs1                    abs1         0000
-__Lbank0                   bank0        0000
-__Lbank1                   bank1        0000
-__Lbank2                   bank2        0000
-__Lbank3                   bank3        0000
-__Lcinit                   cinit        07FC
-__Lclrtext                 clrtext      0000
-__Lcode                    code         0000
-__Lcommon                  common       0000
-__Lconfig                  config       2007
-__LcstackCOMMON            cstackCOMMON 0000
-__Leeprom_data             eeprom_data  0000
-__Lend_init                end_init     0000
-__Lfunctab                 functab      0000
-__Lidloc                   idloc        0000
-__Linit                    init         0000
-__Lintentry                intentry     0000
-__Lmaintext                maintext     0000
-__Lpowerup                 powerup      0000
-__Lram                     ram          0000
-__Lreset_vec               reset_vec    0000
-__Lsfr0                    sfr0         0000
-__Lsfr1                    sfr1         0000
-__Lsfr2                    sfr2         0000
-__Lsfr3                    sfr3         0000
-__Lspace_0                 (abs)        0000
-__Lspace_1                 (abs)        0000
-__Lspace_2                 (abs)        0000
-__Lspace_3                 (abs)        0000
-__Lstack                   stack        0000
-__Lstrings                 strings      0000
-__Ltext                    text         0000
-__S0                       (abs)        2008
-__S1                       (abs)        007B
-__S2                       (abs)        0000
-__S3                       (abs)        0000
-___int_sp                  stack        0000
-___latbits                 (abs)        0002
-___sp                      stack        0000
-___stackhi                 (abs)        0000
-___stacklo                 (abs)        0000
-__end_of_ClearLowNibble    text7        0737
-__end_of_GetHighNibble     text8        0727
-__end_of_GetLowNibble      text3        0717
-__end_of_Initialise        text9        0748
-__end_of_ReadMatrixColumn  text4        078B
-__end_of_ReadMatrixRow     text1        07A3
-__end_of_SetBitHigh        text6        075B
-__end_of_SetColumnHigh     text5        0773
-__end_of_SetRowHigh        text2        07BC
-__end_of__initialization   cinit        07FC
-__end_of_main              maintext     07FC
-__initialization           cinit        07FC
-__pcstackCOMMON            cstackCOMMON 0070
-__pmaintext                maintext     07BC
-__ptext1                   text1        078B
-__ptext2                   text2        07A3
-__ptext3                   text3        070F
-__ptext4                   text4        0773
-__ptext5                   text5        075B
-__ptext6                   text6        0748
-__ptext7                   text7        0727
-__ptext8                   text8        0717
-__ptext9                   text9        0737
-__size_of_ClearLowNibble   (abs)        0000
-__size_of_GetHighNibble    (abs)        0000
-__size_of_GetLowNibble     (abs)        0000
-__size_of_Initialise       (abs)        0000
-__size_of_ReadMatrixColumn (abs)        0000
-__size_of_ReadMatrixRow    (abs)        0000
-__size_of_SetBitHigh       (abs)        0000
-__size_of_SetColumnHigh    (abs)        0000
-__size_of_SetRowHigh       (abs)        0000
-__size_of_main             (abs)        0000
-_main                      maintext     07BC
-btemp                      (abs)        007E
-end_of_initialization      cinit        07FC
-intlevel0                  functab      0000
-intlevel1                  functab      0000
-intlevel2                  functab      0000
-intlevel3                  functab      0000
-intlevel4                  functab      0000
-intlevel5                  functab      0000
-main@i                     cstackCOMMON 007A
-main@res                   cstackCOMMON 0079
-reset_vec                  reset_vec    0000
-start                      init         0000
-start_initialization       cinit        07FC
-wtemp0                     (abs)        007E
+SetCursorPosition@pos                 cstackCOMMON 0074
+SetCursorPosition@secondLine          cstackCOMMON 0076
+SetDdramAddress@addr                  cstackCOMMON 0073
+SetDisplayMode@cursorBlink            cstackCOMMON 0074
+SetDisplayMode@cursorOn               cstackCOMMON 0073
+SetDisplayMode@displayOn              cstackCOMMON 0077
+SetDisplayResolution@displayLargeFont cstackCOMMON 0073
+SetDisplayResolution@displayTwoLines  cstackCOMMON 0076
+ShiftCursor@right                     cstackCOMMON 0074
+WriteCharacter@c                      cstackCOMMON 0072
+WriteCommand@cmd                      cstackCOMMON 0072
+_ADCON1                               (abs)        009F
+_ClearDisplay                         text9        06ED
+_Initialise                           text8        0704
+_MoveCursorToStart                    text7        06F4
+_PORTA                                (abs)        0005
+_PORTD                                (abs)        0008
+_RA1                                  (abs)        0029
+_RA2                                  (abs)        002A
+_RA3                                  (abs)        002B
+_SetCursorPosition                    text5        0794
+_SetDdramAddress                      text6        06FB
+_SetDisplayMode                       text4        0778
+_SetDisplayResolution                 text3        075D
+_ShiftCursor                          text2        0720
+_TRISA                                (abs)        0085
+_TRISD                                (abs)        0088
+_WriteCharacter                       text1        070F
+_WriteCommand                         text10       0732
+__CFG_BOREN$OFF                       (abs)        0000
+__CFG_FOSC$HS                         (abs)        0000
+__CFG_LVP$OFF                         (abs)        0000
+__CFG_PWRTE$ON                        (abs)        0000
+__CFG_WDTE$OFF                        (abs)        0000
+__Habs1                               abs1         0000
+__Hbank0                              bank0        0000
+__Hbank1                              bank1        0000
+__Hbank2                              bank2        0000
+__Hbank3                              bank3        0000
+__Hcinit                              cinit        0800
+__Hclrtext                            clrtext      0000
+__Hcode                               code         0000
+__Hcommon                             common       0000
+__Hconfig                             config       2008
+__HcstackCOMMON                       cstackCOMMON 0000
+__Heeprom_data                        eeprom_data  0000
+__Hend_init                           end_init     0003
+__Hfunctab                            functab      0000
+__Hidloc                              idloc        0000
+__Hinit                               init         0000
+__Hintentry                           intentry     0000
+__Hmaintext                           maintext     0000
+__Hpowerup                            powerup      0000
+__Hram                                ram          0000
+__Hreset_vec                          reset_vec    0000
+__Hsfr0                               sfr0         0000
+__Hsfr1                               sfr1         0000
+__Hsfr2                               sfr2         0000
+__Hsfr3                               sfr3         0000
+__Hspace_0                            (abs)        2008
+__Hspace_1                            (abs)        0078
+__Hspace_2                            (abs)        0000
+__Hspace_3                            (abs)        0000
+__Hstack                              stack        0000
+__Hstrings                            strings      0000
+__Htext                               text         0000
+__Labs1                               abs1         0000
+__Lbank0                              bank0        0000
+__Lbank1                              bank1        0000
+__Lbank2                              bank2        0000
+__Lbank3                              bank3        0000
+__Lcinit                              cinit        07FC
+__Lclrtext                            clrtext      0000
+__Lcode                               code         0000
+__Lcommon                             common       0000
+__Lconfig                             config       2007
+__LcstackCOMMON                       cstackCOMMON 0000
+__Leeprom_data                        eeprom_data  0000
+__Lend_init                           end_init     0000
+__Lfunctab                            functab      0000
+__Lidloc                              idloc        0000
+__Linit                               init         0000
+__Lintentry                           intentry     0000
+__Lmaintext                           maintext     0000
+__Lpowerup                            powerup      0000
+__Lram                                ram          0000
+__Lreset_vec                          reset_vec    0000
+__Lsfr0                               sfr0         0000
+__Lsfr1                               sfr1         0000
+__Lsfr2                               sfr2         0000
+__Lsfr3                               sfr3         0000
+__Lspace_0                            (abs)        0000
+__Lspace_1                            (abs)        0000
+__Lspace_2                            (abs)        0000
+__Lspace_3                            (abs)        0000
+__Lstack                              stack        0000
+__Lstrings                            strings      0000
+__Ltext                               text         0000
+__S0                                  (abs)        2008
+__S1                                  (abs)        0078
+__S2                                  (abs)        0000
+__S3                                  (abs)        0000
+___int_sp                             stack        0000
+___latbits                            (abs)        0002
+___sp                                 stack        0000
+___stackhi                            (abs)        0000
+___stacklo                            (abs)        0000
+__end_of_ClearDisplay                 text9        06F4
+__end_of_Initialise                   text8        070F
+__end_of_MoveCursorToStart            text7        06FB
+__end_of_SetCursorPosition            text5        07B4
+__end_of_SetDdramAddress              text6        0704
+__end_of_SetDisplayMode               text4        0794
+__end_of_SetDisplayResolution         text3        0778
+__end_of_ShiftCursor                  text2        0732
+__end_of_WriteCharacter               text1        0720
+__end_of_WriteCommand                 text10       0747
+__end_of__initialization              cinit        07FC
+__end_of_delay                        text11       075D
+__end_of_main                         maintext     07FC
+__initialization                      cinit        07FC
+__pcstackCOMMON                       cstackCOMMON 0070
+__pmaintext                           maintext     07B4
+__ptext1                              text1        070F
+__ptext10                             text10       0732
+__ptext11                             text11       0747
+__ptext2                              text2        0720
+__ptext3                              text3        075D
+__ptext4                              text4        0778
+__ptext5                              text5        0794
+__ptext6                              text6        06FB
+__ptext7                              text7        06F4
+__ptext8                              text8        0704
+__ptext9                              text9        06ED
+__size_of_ClearDisplay                (abs)        0000
+__size_of_Initialise                  (abs)        0000
+__size_of_MoveCursorToStart           (abs)        0000
+__size_of_SetCursorPosition           (abs)        0000
+__size_of_SetDdramAddress             (abs)        0000
+__size_of_SetDisplayMode              (abs)        0000
+__size_of_SetDisplayResolution        (abs)        0000
+__size_of_ShiftCursor                 (abs)        0000
+__size_of_WriteCharacter              (abs)        0000
+__size_of_WriteCommand                (abs)        0000
+__size_of_delay                       (abs)        0000
+__size_of_main                        (abs)        0000
+_delay                                text11       0747
+_main                                 maintext     07B4
+btemp                                 (abs)        007E
+delay@i                               cstackCOMMON 0070
+end_of_initialization                 cinit        07FC
+intlevel0                             functab      0000
+intlevel1                             functab      0000
+intlevel2                             functab      0000
+intlevel3                             functab      0000
+intlevel4                             functab      0000
+intlevel5                             functab      0000
+reset_vec                             reset_vec    0000
+start                                 init         0000
+start_initialization                  cinit        07FC
+wtemp0                                (abs)        007E
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 88 in file "main.c"
+		line 152 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  res             1    9[COMMON] unsigned char 
-  i               1   10[COMMON] unsigned char 
+		None
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+		wreg, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
       Params:         0       0       0       0       0
-      Locals:         2       0       0       0       0
-      Temps:          1       0       0       0       0
-      Totals:         3       0       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels required when called:    3
+      Locals:         0       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels required when called:    4
  This function calls:
+		_ClearDisplay
 		_Initialise
-		_ReadMatrixColumn
-		_ReadMatrixRow
-		_SetBitHigh
+		_SetCursorPosition
+		_SetDisplayMode
+		_SetDisplayResolution
+		_ShiftCursor
+		_WriteCharacter
  This function is called by:
 		Startup code after reset
  This function uses a non-reentrant model
 
 
- *************** function _ReadMatrixRow *****************
+ *************** function _WriteCharacter *****************
  Defined at:
-		line 79 in file "main.c"
+		line 141 in file "main.c"
  Parameters:    Size  Location     Type
-  row             1    wreg     unsigned char 
+  c               1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
-  row             1    7[COMMON] unsigned char 
+  c               1    2[COMMON] unsigned char 
  Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
+                  1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+		wreg, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -363,26 +381,25 @@ Total ram usage:        3 bytes
       Totals:         1       0       0       0       0
 Total ram usage:        1 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    2
+ Hardware stack levels required when called:    1
  This function calls:
-		_GetLowNibble
-		_SetRowHigh
+		_delay
  This function is called by:
 		_main
  This function uses a non-reentrant model
 
 
- *************** function _SetRowHigh *****************
+ *************** function _ShiftCursor *****************
  Defined at:
-		line 73 in file "main.c"
+		line 109 in file "main.c"
  Parameters:    Size  Location     Type
-  row             1    wreg     unsigned char 
+  right           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
-  row             1    6[COMMON] unsigned char 
+  right           1    4[COMMON] unsigned char 
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+		wreg, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -394,205 +411,172 @@ Total ram usage:        1 bytes
       Totals:         2       0       0       0       0
 Total ram usage:        2 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    1
+ Hardware stack levels required when called:    2
  This function calls:
-		_ClearLowNibble
-		_SetBitHigh
+		_WriteCommand
  This function is called by:
-		_ReadMatrixRow
+		_main
  This function uses a non-reentrant model
 
 
- *************** function _GetLowNibble *****************
+ *************** function _SetDisplayResolution *****************
  Defined at:
-		line 49 in file "main.c"
+		line 99 in file "main.c"
  Parameters:    Size  Location     Type
-  val             2    0[COMMON] PTR unsigned char 
-		 -> PORTC(1), 
+  displayTwoLi    1    wreg     unsigned char 
+  displayLarge    1    3[COMMON] unsigned char 
  Auto vars:     Size  Location     Type
-		None
+  displayTwoLi    1    6[COMMON] unsigned char 
  Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
+                  1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, status,2
+		wreg, status,2, status,0, btemp+1, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         1       0       0       0       0
+      Locals:         1       0       0       0       0
+      Temps:          2       0       0       0       0
+      Totals:         4       0       0       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		_WriteCommand
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _SetDisplayMode *****************
+ Defined at:
+		line 93 in file "main.c"
+ Parameters:    Size  Location     Type
+  displayOn       1    wreg     unsigned char 
+  cursorOn        1    3[COMMON] unsigned char 
+  cursorBlink     1    4[COMMON] unsigned char 
+ Auto vars:     Size  Location     Type
+  displayOn       1    7[COMMON] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
       Params:         2       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         2       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_ReadMatrixRow
- This function uses a non-reentrant model
-
-
- *************** function _ReadMatrixColumn *****************
- Defined at:
-		line 65 in file "main.c"
- Parameters:    Size  Location     Type
-  col             1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  col             1    7[COMMON] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
       Locals:         1       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         1       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_GetHighNibble
-		_SetColumnHigh
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _SetColumnHigh *****************
- Defined at:
-		line 59 in file "main.c"
- Parameters:    Size  Location     Type
-  col             1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  col             1    6[COMMON] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         1       0       0       0       0
-      Temps:          1       0       0       0       0
-      Totals:         2       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		_ClearLowNibble
-		_SetBitHigh
- This function is called by:
-		_ReadMatrixColumn
- This function uses a non-reentrant model
-
-
- *************** function _SetBitHigh *****************
- Defined at:
-		line 16 in file "main.c"
- Parameters:    Size  Location     Type
-  byValue         2    0[COMMON] PTR unsigned char 
-		 -> PORTB(1), PORTC(1), 
-  byBitOffset     1    2[COMMON] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         3       0       0       0       0
-      Locals:         0       0       0       0       0
       Temps:          2       0       0       0       0
       Totals:         5       0       0       0       0
 Total ram usage:        5 bytes
  Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
  This function calls:
-		Nothing
+		_WriteCommand
  This function is called by:
-		_SetColumnHigh
-		_SetRowHigh
 		_main
-		_SetBit
  This function uses a non-reentrant model
 
 
- *************** function _ClearLowNibble *****************
+ *************** function _SetCursorPosition *****************
  Defined at:
-		line 39 in file "main.c"
+		line 129 in file "main.c"
  Parameters:    Size  Location     Type
-  val             2    0[COMMON] PTR unsigned char 
-		 -> PORTC(1), 
+  secondLine      1    wreg     unsigned char 
+  pos             1    4[COMMON] unsigned char 
+ Auto vars:     Size  Location     Type
+  secondLine      1    6[COMMON] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, btemp+1, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         1       0       0       0       0
+      Locals:         1       0       0       0       0
+      Temps:          1       0       0       0       0
+      Totals:         3       0       0       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    3
+ This function calls:
+		_MoveCursorToStart
+		_SetDdramAddress
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _SetDdramAddress *****************
+ Defined at:
+		line 124 in file "main.c"
+ Parameters:    Size  Location     Type
+  addr            1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  addr            1    3[COMMON] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, btemp+1, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         1       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         1       0       0       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		_WriteCommand
+ This function is called by:
+		_SetCursorPosition
+ This function uses a non-reentrant model
+
+
+ *************** function _MoveCursorToStart *****************
+ Defined at:
+		line 119 in file "main.c"
+ Parameters:    Size  Location     Type
+		None
  Auto vars:     Size  Location     Type
 		None
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, status,2
+		wreg, status,2, status,0, btemp+1, pclath, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         2       0       0       0       0
+      Params:         0       0       0       0       0
       Locals:         0       0       0       0       0
-      Temps:          1       0       0       0       0
-      Totals:         3       0       0       0       0
-Total ram usage:        3 bytes
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
  Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
  This function calls:
-		Nothing
+		_WriteCommand
  This function is called by:
-		_SetColumnHigh
-		_SetRowHigh
- This function uses a non-reentrant model
-
-
- *************** function _GetHighNibble *****************
- Defined at:
-		line 54 in file "main.c"
- Parameters:    Size  Location     Type
-  val             2    0[COMMON] PTR unsigned char 
-		 -> PORTC(1), 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         2       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          1       0       0       0       0
-      Totals:         3       0       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_ReadMatrixColumn
+		_SetCursorPosition
  This function uses a non-reentrant model
 
 
  *************** function _Initialise *****************
  Defined at:
-		line 112 in file "main.c"
+		line 172 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -619,6 +603,102 @@ Total ram usage:        0 bytes
  This function uses a non-reentrant model
 
 
+ *************** function _ClearDisplay *****************
+ Defined at:
+		line 104 in file "main.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, btemp+1, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         0       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    2
+ This function calls:
+		_WriteCommand
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _WriteCommand *****************
+ Defined at:
+		line 82 in file "main.c"
+ Parameters:    Size  Location     Type
+  cmd             1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  cmd             1    2[COMMON] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0, btemp+1, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         1       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         1       0       0       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		_delay
+ This function is called by:
+		_SetDisplayMode
+		_SetDisplayResolution
+		_ClearDisplay
+		_ShiftCursor
+		_MoveCursorToStart
+		_SetDdramAddress
+		_ShiftDisplay
+ This function uses a non-reentrant model
+
+
+ *************** function _delay *****************
+ Defined at:
+		line 80 in file "main.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  i               2    0[COMMON] int 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, btemp+1
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+      Params:         0       0       0       0       0
+      Locals:         2       0       0       0       0
+      Temps:          0       0       0       0       0
+      Totals:         2       0       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_WriteCommand
+		_WriteCharacter
+ This function uses a non-reentrant model
+
+
 
 MODULE INFORMATION
 
@@ -629,16 +709,18 @@ shared
 shared estimated size: 1
 
 main.c
-		_ClearLowNibble		CODE           	0727	0000	17
-		_GetLowNibble  		CODE           	070F	0000	9
-		_main          		CODE           	07BC	0000	65
-		_SetBitHigh    		CODE           	0748	0000	20
-		_GetHighNibble 		CODE           	0717	0000	17
-		_Initialise    		CODE           	0737	0000	18
-		_ReadMatrixRow 		CODE           	078B	0000	25
-		_ReadMatrixColumn		CODE           	0773	0000	25
-		_SetRowHigh    		CODE           	07A3	0000	26
-		_SetColumnHigh 		CODE           	075B	0000	25
+		_ShiftCursor   		CODE           	0720	0000	19
+		_ClearDisplay  		CODE           	06ED	0000	8
+		_delay         		CODE           	0747	0000	23
+		_WriteCharacter		CODE           	070F	0000	18
+		_main          		CODE           	07B4	0000	73
+		_Initialise    		CODE           	0704	0000	12
+		_SetDisplayResolution		CODE           	075D	0000	28
+		_MoveCursorToStart		CODE           	06F4	0000	8
+		_SetCursorPosition		CODE           	0794	0000	33
+		_SetDdramAddress		CODE           	06FB	0000	10
+		_WriteCommand  		CODE           	0732	0000	22
+		_SetDisplayMode		CODE           	0778	0000	29
 
-main.c estimated size: 247
+main.c estimated size: 283
 

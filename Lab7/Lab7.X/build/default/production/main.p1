@@ -1,30 +1,33 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"278 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 278: extern volatile unsigned char PORTC __attribute__((address(0x007)));
-[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
-"1437
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1437: extern volatile unsigned char TRISC __attribute__((address(0x087)));
-[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"1499 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1499: extern volatile unsigned char TRISD __attribute__((address(0x088)));
+[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
+"2659
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2659: extern volatile __bit RA1 __attribute__((address(0x29)));
+[v _RA1 `Vb ~T0 @X0 0 e@41 ]
+"2662
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2662: extern volatile __bit RA2 __attribute__((address(0x2A)));
+[v _RA2 `Vb ~T0 @X0 0 e@42 ]
+"340
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 340: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
+"2665
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2665: extern volatile __bit RA3 __attribute__((address(0x2B)));
+[v _RA3 `Vb ~T0 @X0 0 e@43 ]
 [p mainexit ]
-[v F889 `(v ~T0 @X0 1 tf ]
-"87 main.c
-[; ;main.c: 87:             PORTA = 0;
-[v _Initialise `TF889 ~T0 @X0 0 e ]
-"166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
-[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
-"216
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 216: extern volatile unsigned char PORTB __attribute__((address(0x006)));
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-"2229
+[v F920 `(v ~T0 @X0 1 tf ]
+"151 main.c
+[; ;main.c: 151: __attribute__((inline)) void Initialise();
+[v _Initialise `TF920 ~T0 @X0 0 e ]
+"2229 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2229: extern volatile unsigned char ADCON1 __attribute__((address(0x09F)));
 [v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
 "1325
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1325: extern volatile unsigned char TRISA __attribute__((address(0x085)));
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
-"1375
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1375: extern volatile unsigned char TRISB __attribute__((address(0x086)));
-[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
+"166
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -364,253 +367,435 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [v F875 `(uc ~T0 @X0 1 tf1`*uc ]
 "49
-[; ;main.c: 49: void SetColumnHigh(uchar col)
+[; ;main.c: 49: __attribute__((inline)) void SetLowNibble(uchar* val, uchar newVal)
 [v _GetLowNibble `TF875 ~T0 @X0 1 e ]
 "50
 [; ;main.c: 50: {
 {
 [e :U _GetLowNibble ]
 "49
-[; ;main.c: 49: void SetColumnHigh(uchar col)
+[; ;main.c: 49: __attribute__((inline)) void SetLowNibble(uchar* val, uchar newVal)
 [v _val `*uc ~T0 @X0 1 r1 ]
 "50
 [; ;main.c: 50: {
 [f ]
 "51
-[; ;main.c: 51:     ClearLowNibble(&PORTC);
+[; ;main.c: 51:     *val = (*val & 0xF0) | newVal;
 [e ) -> & -> *U _val `i -> 240 `i `uc ]
 [e $UE 103  ]
 "52
-[; ;main.c: 52:     SetBitHigh(&PORTC, col);
+[; ;main.c: 52: }
 [e :UE 103 ]
 }
 [v F878 `(uc ~T0 @X0 1 tf1`*uc ]
 "54
-[; ;main.c: 54: 
+[; ;main.c: 54: __attribute__((inline)) void SetHighNibble(uchar* val, uchar newVal)
 [v _GetHighNibble `TF878 ~T0 @X0 1 e ]
 "55
-[; ;main.c: 55: uchar ReadMatrixColumn(uchar col)
+[; ;main.c: 55: {
 {
 [e :U _GetHighNibble ]
 "54
-[; ;main.c: 54: 
+[; ;main.c: 54: __attribute__((inline)) void SetHighNibble(uchar* val, uchar newVal)
 [v _val `*uc ~T0 @X0 1 r1 ]
 "55
-[; ;main.c: 55: uchar ReadMatrixColumn(uchar col)
+[; ;main.c: 55: {
 [f ]
 "56
-[; ;main.c: 56: {
+[; ;main.c: 56:     *val = (*val & 0x0F) | newVal << 4;
 [e ) -> >> & -> *U _val `i -> 240 `i -> 4 `i `uc ]
 [e $UE 104  ]
 "57
-[; ;main.c: 57:     PORTC = 0;
+[; ;main.c: 57: }
 [e :UE 104 ]
 }
+[v F881 `(v ~T0 @X0 1 tf2`*uc`uc ]
 "59
-[; ;main.c: 59:     SetColumnHigh(col);
-[v _SetColumnHigh `(v ~T0 @X0 1 ef1`uc ]
+[v _SetLowNibble `TF881 ~T0 @X0 1 e ]
 "60
-[; ;main.c: 60:     return GetHighNibble(&PORTC);
 {
-[e :U _SetColumnHigh ]
+[e :U _SetLowNibble ]
 "59
-[; ;main.c: 59:     SetColumnHigh(col);
-[v _col `uc ~T0 @X0 1 r1 ]
+[v _val `*uc ~T0 @X0 1 r1 ]
+[v _newVal `uc ~T0 @X0 1 r2 ]
 "60
-[; ;main.c: 60:     return GetHighNibble(&PORTC);
 [f ]
 "61
-[; ;main.c: 61: }
-[e ( _ClearLowNibble (1 -> &U _PORTC `*uc ]
+[e = *U _val -> | & -> *U _val `i -> 240 `i -> _newVal `i `uc ]
 "62
-[; ;main.c: 62: 
-[e ( _SetBitHigh (2 , -> &U _PORTC `*uc _col ]
-"63
-[; ;main.c: 63: void SetRowHigh(uchar row)
 [e :UE 105 ]
 }
+[v F885 `(v ~T0 @X0 1 tf2`*uc`uc ]
+"64
+[v _SetHighNibble `TF885 ~T0 @X0 1 e ]
 "65
-[; ;main.c: 65:     ClearLowNibble(&PORTC);
-[v _ReadMatrixColumn `(uc ~T0 @X0 1 ef1`uc ]
-"66
-[; ;main.c: 66:     SetBitHigh(&PORTC, row + 4);
 {
-[e :U _ReadMatrixColumn ]
+[e :U _SetHighNibble ]
+"64
+[v _val `*uc ~T0 @X0 1 r1 ]
+[v _newVal `uc ~T0 @X0 1 r2 ]
 "65
-[; ;main.c: 65:     ClearLowNibble(&PORTC);
-[v _col `uc ~T0 @X0 1 r1 ]
-"66
-[; ;main.c: 66:     SetBitHigh(&PORTC, row + 4);
 [f ]
+"66
+[e = *U _val -> | & -> *U _val `i -> 15 `i << -> _newVal `i -> 4 `i `uc ]
 "67
-[; ;main.c: 67: }
-[e = _PORTC -> -> 0 `i `uc ]
-"68
-[; ;main.c: 68: 
-[e = _TRISC -> -> 240 `i `uc ]
-"69
-[; ;main.c: 69: uchar ReadMatrixRow(uchar row)
-[e ( _SetColumnHigh (1 _col ]
-"70
-[; ;main.c: 70: {
-[e ) ( _GetHighNibble (1 -> &U _PORTC `*uc ]
-[e $UE 106  ]
-"71
-[; ;main.c: 71:     PORTC = 0;
 [e :UE 106 ]
 }
-"73
-[; ;main.c: 73:     SetRowHigh(row);
-[v _SetRowHigh `(v ~T0 @X0 1 ef1`uc ]
-"74
-[; ;main.c: 74:     return GetLowNibble(&PORTC);
+"80
+[; ;main.c: 80: void delay(){int i;for(i=0;i<5000;i++);}
+[v _delay `(v ~T0 @X0 1 ef ]
 {
-[e :U _SetRowHigh ]
-"73
-[; ;main.c: 73:     SetRowHigh(row);
-[v _row `uc ~T0 @X0 1 r1 ]
-"74
-[; ;main.c: 74:     return GetLowNibble(&PORTC);
+[e :U _delay ]
 [f ]
-"75
-[; ;main.c: 75: }
-[e ( _ClearLowNibble (1 -> &U _PORTC `*uc ]
-"76
-[; ;main.c: 76: 
-[e ( _SetBitHigh (2 , -> &U _PORTC `*uc -> + -> _row `i -> 4 `i `uc ]
-"77
-[; ;main.c: 77: __attribute__((inline)) void Initialise();
+[v _i `i ~T0 @X0 1 a ]
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 5000 `i 108  ]
+[e $U 109  ]
+[e :U 108 ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 5000 `i 108  ]
+[e :U 109 ]
+}
 [e :UE 107 ]
 }
-"79
-[; ;main.c: 79: {
-[v _ReadMatrixRow `(uc ~T0 @X0 1 ef1`uc ]
-"80
-[; ;main.c: 80:     Initialise();
-{
-[e :U _ReadMatrixRow ]
-"79
-[; ;main.c: 79: {
-[v _row `uc ~T0 @X0 1 r1 ]
-"80
-[; ;main.c: 80:     Initialise();
-[f ]
-"81
-[; ;main.c: 81: 
-[e = _PORTC -> -> 0 `i `uc ]
+[v F891 `(v ~T0 @X0 1 tf1`uc ]
 "82
-[; ;main.c: 82:     uchar i;
-[e = _TRISC -> -> 15 `i `uc ]
+[; ;main.c: 82: __attribute__((inline)) void WriteCommand(uchar cmd)
+[v _WriteCommand `TF891 ~T0 @X0 1 e ]
 "83
-[; ;main.c: 83:     while (1)
-[e ( _SetRowHigh (1 _row ]
+[; ;main.c: 83: {
+{
+[e :U _WriteCommand ]
+"82
+[; ;main.c: 82: __attribute__((inline)) void WriteCommand(uchar cmd)
+[v _cmd `uc ~T0 @X0 1 r1 ]
+"83
+[; ;main.c: 83: {
+[f ]
 "84
-[; ;main.c: 84:     {
-[e ) ( _GetLowNibble (1 -> &U _PORTC `*uc ]
-[e $UE 108  ]
+[; ;main.c: 84:     TRISD = 0x00;
+[e = _TRISD -> -> 0 `i `uc ]
 "85
-[; ;main.c: 85:         for (i = 0; i < 4; i++)
-[e :UE 108 ]
+[; ;main.c: 85:     RA1 = 0;
+[e = _RA1 -> -> 0 `i `b ]
+"86
+[; ;main.c: 86:     RA2 = 0;
+[e = _RA2 -> -> 0 `i `b ]
+"87
+[; ;main.c: 87:     PORTD = cmd;
+[e = _PORTD _cmd ]
+"88
+[; ;main.c: 88:     RA3 = 0;
+[e = _RA3 -> -> 0 `i `b ]
+"89
+[; ;main.c: 89:     delay();
+[e ( _delay ..  ]
+"90
+[; ;main.c: 90:     RA3 = 1;
+[e = _RA3 -> -> 1 `i `b ]
+"91
+[; ;main.c: 91:     PORTD = 0;
+[e = _PORTD -> -> 0 `i `uc ]
+"92
+[; ;main.c: 92: }
+[e :UE 111 ]
+}
+[v F894 `(v ~T0 @X0 1 tf3`uc`uc`uc ]
+"93
+[; ;main.c: 93: __attribute__((inline)) void SetDisplayMode(bool displayOn, bool cursorOn, bool cursorBlink)
+[v _SetDisplayMode `TF894 ~T0 @X0 1 e ]
+"94
+[; ;main.c: 94: {
+{
+[e :U _SetDisplayMode ]
+"93
+[; ;main.c: 93: __attribute__((inline)) void SetDisplayMode(bool displayOn, bool cursorOn, bool cursorBlink)
+[v _displayOn `uc ~T0 @X0 1 r1 ]
+[v _cursorOn `uc ~T0 @X0 1 r2 ]
+[v _cursorBlink `uc ~T0 @X0 1 r3 ]
+"94
+[; ;main.c: 94: {
+[f ]
+"95
+[; ;main.c: 95:     WriteCommand(0b00001000 | displayOn << 2 | cursorOn << 1 | cursorBlink);
+[e ( _WriteCommand (1 -> | | | -> 8 `i << -> _displayOn `i -> 2 `i << -> _cursorOn `i -> 1 `i -> _cursorBlink `i `uc ]
+"96
+[; ;main.c: 96: }
+[e :UE 112 ]
+}
+[v F899 `(v ~T0 @X0 1 tf2`uc`uc ]
+"99
+[; ;main.c: 99: __attribute__((inline)) void SetDisplayResolution(bool displayTwoLines, bool displayLargeFont)
+[v _SetDisplayResolution `TF899 ~T0 @X0 1 e ]
+"100
+[; ;main.c: 100: {
+{
+[e :U _SetDisplayResolution ]
+"99
+[; ;main.c: 99: __attribute__((inline)) void SetDisplayResolution(bool displayTwoLines, bool displayLargeFont)
+[v _displayTwoLines `uc ~T0 @X0 1 r1 ]
+[v _displayLargeFont `uc ~T0 @X0 1 r2 ]
+"100
+[; ;main.c: 100: {
+[f ]
+"101
+[; ;main.c: 101:     WriteCommand(0b00110000 | displayTwoLines << 3 | displayLargeFont << 2);
+[e ( _WriteCommand (1 -> | | -> 48 `i << -> _displayTwoLines `i -> 3 `i << -> _displayLargeFont `i -> 2 `i `uc ]
+"102
+[; ;main.c: 102: }
+[e :UE 113 ]
+}
+[v F903 `(v ~T0 @X0 1 tf ]
+"104
+[; ;main.c: 104: __attribute__((inline)) void ClearDisplay()
+[v _ClearDisplay `TF903 ~T0 @X0 1 e ]
+"105
+[; ;main.c: 105: {
+{
+[e :U _ClearDisplay ]
+[f ]
+"106
+[; ;main.c: 106:     WriteCommand(0x1);
+[e ( _WriteCommand (1 -> -> 1 `i `uc ]
+"107
+[; ;main.c: 107: }
+[e :UE 114 ]
+}
+"109
+[; ;main.c: 109: void ShiftCursor(bool right)
+[v _ShiftCursor `(v ~T0 @X0 1 ef1`uc ]
+"110
+[; ;main.c: 110: {
+{
+[e :U _ShiftCursor ]
+"109
+[; ;main.c: 109: void ShiftCursor(bool right)
+[v _right `uc ~T0 @X0 1 r1 ]
+"110
+[; ;main.c: 110: {
+[f ]
+"111
+[; ;main.c: 111:     WriteCommand(0b00010000 | right << 2);
+[e ( _WriteCommand (1 -> | -> 16 `i << -> _right `i -> 2 `i `uc ]
+"112
+[; ;main.c: 112: }
+[e :UE 115 ]
+}
+"114
+[; ;main.c: 114: void ShiftDisplay(bool right)
+[v _ShiftDisplay `(v ~T0 @X0 1 ef1`uc ]
+"115
+[; ;main.c: 115: {
+{
+[e :U _ShiftDisplay ]
+"114
+[; ;main.c: 114: void ShiftDisplay(bool right)
+[v _right `uc ~T0 @X0 1 r1 ]
+"115
+[; ;main.c: 115: {
+[f ]
+"116
+[; ;main.c: 116:     WriteCommand(0b00011000 | right << 2);
+[e ( _WriteCommand (1 -> | -> 24 `i << -> _right `i -> 2 `i `uc ]
+"117
+[; ;main.c: 117: }
+[e :UE 116 ]
+}
+[v F909 `(v ~T0 @X0 1 tf ]
+"119
+[; ;main.c: 119: __attribute__((inline)) void MoveCursorToStart()
+[v _MoveCursorToStart `TF909 ~T0 @X0 1 e ]
+"120
+[; ;main.c: 120: {
+{
+[e :U _MoveCursorToStart ]
+[f ]
+"121
+[; ;main.c: 121:     WriteCommand(0x02);
+[e ( _WriteCommand (1 -> -> 2 `i `uc ]
+"122
+[; ;main.c: 122: }
+[e :UE 117 ]
+}
+"124
+[; ;main.c: 124: void SetDdramAddress(uchar addr)
+[v _SetDdramAddress `(v ~T0 @X0 1 ef1`uc ]
+"125
+[; ;main.c: 125: {
+{
+[e :U _SetDdramAddress ]
+"124
+[; ;main.c: 124: void SetDdramAddress(uchar addr)
+[v _addr `uc ~T0 @X0 1 r1 ]
+"125
+[; ;main.c: 125: {
+[f ]
+"126
+[; ;main.c: 126:     WriteCommand(0b10000000 | addr);
+[e ( _WriteCommand (1 -> | -> 128 `i -> _addr `i `uc ]
+"127
+[; ;main.c: 127: }
+[e :UE 118 ]
+}
+[v F913 `(v ~T0 @X0 1 tf2`uc`uc ]
+"129
+[; ;main.c: 129: __attribute__((inline)) void SetCursorPosition(bool secondLine, uchar pos)
+[v _SetCursorPosition `TF913 ~T0 @X0 1 e ]
+"130
+[; ;main.c: 130: {
+{
+[e :U _SetCursorPosition ]
+"129
+[; ;main.c: 129: __attribute__((inline)) void SetCursorPosition(bool secondLine, uchar pos)
+[v _secondLine `uc ~T0 @X0 1 r1 ]
+[v _pos `uc ~T0 @X0 1 r2 ]
+"130
+[; ;main.c: 130: {
+[f ]
+"131
+[; ;main.c: 131:     MoveCursorToStart();
+[e ( _MoveCursorToStart ..  ]
+"132
+[; ;main.c: 132:     if (pos > 39)
+[e $ ! > -> _pos `i -> 39 `i 120  ]
+"133
+[; ;main.c: 133:         pos = 39;
+[e = _pos -> -> 39 `i `uc ]
+[e :U 120 ]
+"135
+[; ;main.c: 135:     if (secondLine)
+[e $ ! != -> _secondLine `i -> 0 `i 121  ]
+"136
+[; ;main.c: 136:         pos += 40;
+[e =+ _pos -> -> 40 `i `uc ]
+[e :U 121 ]
+"138
+[; ;main.c: 138:     SetDdramAddress(pos);
+[e ( _SetDdramAddress (1 _pos ]
+"139
+[; ;main.c: 139: }
+[e :UE 119 ]
+}
+[v F917 `(v ~T0 @X0 1 tf1`uc ]
+"141
+[; ;main.c: 141: __attribute__((inline)) void WriteCharacter(char c)
+[v _WriteCharacter `TF917 ~T0 @X0 1 e ]
+"142
+[; ;main.c: 142: {
+{
+[e :U _WriteCharacter ]
+"141
+[; ;main.c: 141: __attribute__((inline)) void WriteCharacter(char c)
+[v _c `uc ~T0 @X0 1 r1 ]
+"142
+[; ;main.c: 142: {
+[f ]
+"143
+[; ;main.c: 143:     RA1 = 1;
+[e = _RA1 -> -> 1 `i `b ]
+"144
+[; ;main.c: 144:     RA2 = 0;
+[e = _RA2 -> -> 0 `i `b ]
+"145
+[; ;main.c: 145:     PORTD = c;
+[e = _PORTD -> _c `uc ]
+"146
+[; ;main.c: 146:     RA3 = 0;
+[e = _RA3 -> -> 0 `i `b ]
+"147
+[; ;main.c: 147:     delay();
+[e ( _delay ..  ]
+"148
+[; ;main.c: 148:     RA3 = 1;
+[e = _RA3 -> -> 1 `i `b ]
+"149
+[; ;main.c: 149: }
+[e :UE 122 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"88
-[; ;main.c: 88:             PORTB = 0;
+"152
+[; ;main.c: 152: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"89
-[; ;main.c: 89:             uchar res = ReadMatrixColumn(i);
+"153
+[; ;main.c: 153: {
 {
 [e :U _main ]
 [f ]
-"90
-[; ;main.c: 90: 
+"154
+[; ;main.c: 154:     Initialise();
 [e ( _Initialise ..  ]
-"92
-[; ;main.c: 92:             PORTA = res;
-[v _i `uc ~T0 @X0 1 a ]
-"93
-[; ;main.c: 93: 
-[e :U 111 ]
-"94
-[; ;main.c: 94:             if (PORTA > 0)
+"156
+[; ;main.c: 156:     SetDisplayMode(1, 1, 1);
+[e ( _SetDisplayMode (3 , , -> -> 1 `i `uc -> -> 1 `i `uc -> -> 1 `i `uc ]
+"157
+[; ;main.c: 157:     ClearDisplay();
+[e ( _ClearDisplay ..  ]
+"158
+[; ;main.c: 158:     SetDisplayResolution(1, 0);
+[e ( _SetDisplayResolution (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+"159
+[; ;main.c: 159:     WriteCharacter('a');
+[e ( _WriteCharacter (1 -> -> 97 `ui `uc ]
+"160
+[; ;main.c: 160:     WriteCharacter('b');
+[e ( _WriteCharacter (1 -> -> 98 `ui `uc ]
+"161
+[; ;main.c: 161:     ShiftCursor(1);
+[e ( _ShiftCursor (1 -> -> 1 `i `uc ]
+"162
+[; ;main.c: 162:     WriteCharacter('c');
+[e ( _WriteCharacter (1 -> -> 99 `ui `uc ]
+"163
+[; ;main.c: 163:     SetCursorPosition(1, 0);
+[e ( _SetCursorPosition (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+"164
+[; ;main.c: 164:     while (1)
+[e :U 125 ]
+"165
+[; ;main.c: 165:     {
 {
-"95
-[; ;main.c: 95:                 SetBitHigh(&PORTB, i);
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 4 `i 113  ]
-[e $U 114  ]
-[e :U 113 ]
-"96
-[; ;main.c: 96:         }
-{
-"97
-[; ;main.c: 97:     }
-[e = _PORTA -> -> 0 `i `uc ]
-"98
-[; ;main.c: 98: 
-[e = _PORTB -> -> 0 `i `uc ]
-"99
-[; ;main.c: 99:     return;
-[v _res `uc ~T0 @X0 1 a ]
-[e = _res ( _ReadMatrixColumn (1 _i ]
-"101
-[; ;main.c: 101: 
-[e =& _res -> ( _ReadMatrixRow (1 _i `uc ]
-"102
-[; ;main.c: 102: __attribute__((inline)) void Initialise()
-[e = _PORTA _res ]
-"104
-[; ;main.c: 104: 
-[e $ ! > -> _PORTA `i -> 0 `i 116  ]
-"105
-[; ;main.c: 105:     ADCON1 = 0b00000110;
-[e ( _SetBitHigh (2 , -> &U _PORTB `*uc _i ]
-[e :U 116 ]
-"106
-[; ;main.c: 106:     TRISA = 0b11110000;
+"166
+[; ;main.c: 166:         SetDisplayMode(1, 1, 1);
+[e ( _SetDisplayMode (3 , , -> -> 1 `i `uc -> -> 1 `i `uc -> -> 1 `i `uc ]
+"167
+[; ;main.c: 167:     }
 }
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 4 `i 113  ]
-[e :U 114 ]
+[e :U 124 ]
+[e $U 125  ]
+[e :U 126 ]
+"169
+[; ;main.c: 169:     return;
+[e $UE 123  ]
+"170
+[; ;main.c: 170: }
+[e :UE 123 ]
 }
-"107
-[; ;main.c: 107:     TRISB = 0b11110000;
-}
-[e :U 110 ]
-[e $U 111  ]
-[e :U 112 ]
-"109
-[; ;main.c: 109:     TRISA = 0x00;
-[e $UE 109  ]
-"110
-[; ;main.c: 110:     PORTA = 0x00;
-[e :UE 109 ]
-}
-[v F894 `(v ~T0 @X0 1 tf ]
-"112
-[; ;main.c: 112:     PORTC = 0x00;
-[v _Initialise `TF894 ~T0 @X0 1 e ]
-"113
-[; ;main.c: 113: }
+[v F923 `(v ~T0 @X0 1 tf ]
+"172
+[; ;main.c: 172: __attribute__((inline)) void Initialise()
+[v _Initialise `TF923 ~T0 @X0 1 e ]
+"173
+[; ;main.c: 173: {
 {
 [e :U _Initialise ]
 [f ]
-"115
-[e = _ADCON1 -> -> 6 `i `uc ]
-"116
-[e = _TRISA -> -> 240 `i `uc ]
-"117
-[e = _TRISB -> -> 240 `i `uc ]
-"118
-[e = _TRISC -> -> 240 `i `uc ]
-"119
+"175
+[; ;main.c: 175:     ADCON1 = 0x07;
+[e = _ADCON1 -> -> 7 `i `uc ]
+"176
+[; ;main.c: 176:     TRISA = 0b00000000;
 [e = _TRISA -> -> 0 `i `uc ]
-"120
+"177
+[; ;main.c: 177:     TRISD = 0b00000000;
+[e = _TRISD -> -> 0 `i `uc ]
+"178
+[; ;main.c: 178:     PORTA = 0x00;
 [e = _PORTA -> -> 0 `i `uc ]
-"121
-[e = _PORTB -> -> 0 `i `uc ]
-"122
-[e = _PORTC -> -> 0 `i `uc ]
-"123
-[e :UE 117 ]
+"179
+[; ;main.c: 179:     PORTD = 0x00;
+[e = _PORTD -> -> 0 `i `uc ]
+"180
+[; ;main.c: 180: }
+[e :UE 127 ]
 }

@@ -15,110 +15,135 @@
 [v _SetBitHigh SetBitHigh `T(v  1 e 1 0 ]
 "21
 [v _SetBitLow SetBitLow `T(v  1 e 1 0 ]
-"39
-[v _ClearLowNibble ClearLowNibble `T(v  1 e 1 0 ]
-"49
-[v _GetLowNibble GetLowNibble `T(uc  1 e 1 0 ]
-"54
-[v _GetHighNibble GetHighNibble `T(uc  1 e 1 0 ]
-"59
-[v _SetColumnHigh SetColumnHigh `(v  1 e 1 0 ]
-"65
-[v _ReadMatrixColumn ReadMatrixColumn `(uc  1 e 1 0 ]
-"73
-[v _SetRowHigh SetRowHigh `(v  1 e 1 0 ]
-"79
-[v _ReadMatrixRow ReadMatrixRow `(uc  1 e 1 0 ]
-"88
+"80
+[v _delay delay `(v  1 e 1 0 ]
+"82
+[v _WriteCommand WriteCommand `T(v  1 e 1 0 ]
+"93
+[v _SetDisplayMode SetDisplayMode `T(v  1 e 1 0 ]
+"99
+[v _SetDisplayResolution SetDisplayResolution `T(v  1 e 1 0 ]
+"104
+[v _ClearDisplay ClearDisplay `T(v  1 e 1 0 ]
+"109
+[v _ShiftCursor ShiftCursor `(v  1 e 1 0 ]
+"119
+[v _MoveCursorToStart MoveCursorToStart `T(v  1 e 1 0 ]
+"124
+[v _SetDdramAddress SetDdramAddress `(v  1 e 1 0 ]
+"129
+[v _SetCursorPosition SetCursorPosition `T(v  1 e 1 0 ]
+"141
+[v _WriteCharacter WriteCharacter `T(v  1 e 1 0 ]
+"152
 [v _main main `(v  1 e 1 0 ]
-"112
+"172
 [v _Initialise Initialise `T(v  1 e 1 0 ]
 "166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
-"216
-[v _PORTB PORTB `VEuc  1 e 1 @6 ]
-"278
-[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"340
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "1325
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
-"1375
-[v _TRISB TRISB `VEuc  1 e 1 @134 ]
-"1437
-[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "2229
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
-"88 C:\Programming\EmbeddedSystems\Lab7\Lab7.X\main.c
+"2659
+[v _RA1 RA1 `VEb  1 e 0 @41 ]
+"2662
+[v _RA2 RA2 `VEb  1 e 0 @42 ]
+"2665
+[v _RA3 RA3 `VEb  1 e 0 @43 ]
+"152 C:\Programming\EmbeddedSystems\Lab7\Lab7.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"99
-[v main@res res `uc  1 a 1 9 ]
-"92
-[v main@i i `uc  1 a 1 10 ]
-"110
+"170
 } 0
-"79
-[v _ReadMatrixRow ReadMatrixRow `(uc  1 e 1 0 ]
+"141
+[v _WriteCharacter WriteCharacter `T(v  1 e 1 0 ]
 {
-[v ReadMatrixRow@row row `uc  1 a 1 wreg ]
-[v ReadMatrixRow@row row `uc  1 a 1 wreg ]
-"81
-[v ReadMatrixRow@row row `uc  1 a 1 7 ]
-"85
+[v WriteCharacter@c c `uc  1 a 1 wreg ]
+[v WriteCharacter@c c `uc  1 a 1 wreg ]
+"143
+[v WriteCharacter@c c `uc  1 a 1 2 ]
+"149
 } 0
-"73
-[v _SetRowHigh SetRowHigh `(v  1 e 1 0 ]
+"109
+[v _ShiftCursor ShiftCursor `(v  1 e 1 0 ]
 {
-[v SetRowHigh@row row `uc  1 a 1 wreg ]
-[v SetRowHigh@row row `uc  1 a 1 wreg ]
-"75
-[v SetRowHigh@row row `uc  1 a 1 6 ]
-"77
-} 0
-"49
-[v _GetLowNibble GetLowNibble `T(uc  1 e 1 0 ]
-{
-[v GetLowNibble@val val `*.39uc  1 p 2 0 ]
-"52
-} 0
-"65
-[v _ReadMatrixColumn ReadMatrixColumn `(uc  1 e 1 0 ]
-{
-[v ReadMatrixColumn@col col `uc  1 a 1 wreg ]
-[v ReadMatrixColumn@col col `uc  1 a 1 wreg ]
-"67
-[v ReadMatrixColumn@col col `uc  1 a 1 7 ]
-"71
-} 0
-"59
-[v _SetColumnHigh SetColumnHigh `(v  1 e 1 0 ]
-{
-[v SetColumnHigh@col col `uc  1 a 1 wreg ]
-[v SetColumnHigh@col col `uc  1 a 1 wreg ]
-"61
-[v SetColumnHigh@col col `uc  1 a 1 6 ]
-"63
-} 0
-"16
-[v _SetBitHigh SetBitHigh `T(v  1 e 1 0 ]
-{
-[v SetBitHigh@byValue byValue `*.39uc  1 p 2 0 ]
-[v SetBitHigh@byBitOffset byBitOffset `uc  1 p 1 2 ]
-"19
-} 0
-"39
-[v _ClearLowNibble ClearLowNibble `T(v  1 e 1 0 ]
-{
-[v ClearLowNibble@val val `*.39uc  1 p 2 0 ]
-"42
-} 0
-"54
-[v _GetHighNibble GetHighNibble `T(uc  1 e 1 0 ]
-{
-[v GetHighNibble@val val `*.39uc  1 p 2 0 ]
-"57
-} 0
+[v ShiftCursor@right right `uc  1 a 1 wreg ]
+[v ShiftCursor@right right `uc  1 a 1 wreg ]
+"111
+[v ShiftCursor@right right `uc  1 a 1 4 ]
 "112
+} 0
+"99
+[v _SetDisplayResolution SetDisplayResolution `T(v  1 e 1 0 ]
+{
+[v SetDisplayResolution@displayTwoLines displayTwoLines `uc  1 a 1 wreg ]
+[v SetDisplayResolution@displayTwoLines displayTwoLines `uc  1 a 1 wreg ]
+[v SetDisplayResolution@displayLargeFont displayLargeFont `uc  1 p 1 3 ]
+"101
+[v SetDisplayResolution@displayTwoLines displayTwoLines `uc  1 a 1 6 ]
+"102
+} 0
+"93
+[v _SetDisplayMode SetDisplayMode `T(v  1 e 1 0 ]
+{
+[v SetDisplayMode@displayOn displayOn `uc  1 a 1 wreg ]
+[v SetDisplayMode@displayOn displayOn `uc  1 a 1 wreg ]
+[v SetDisplayMode@cursorOn cursorOn `uc  1 p 1 3 ]
+[v SetDisplayMode@cursorBlink cursorBlink `uc  1 p 1 4 ]
+"95
+[v SetDisplayMode@displayOn displayOn `uc  1 a 1 7 ]
+"96
+} 0
+"129
+[v _SetCursorPosition SetCursorPosition `T(v  1 e 1 0 ]
+{
+[v SetCursorPosition@secondLine secondLine `uc  1 a 1 wreg ]
+[v SetCursorPosition@secondLine secondLine `uc  1 a 1 wreg ]
+[v SetCursorPosition@pos pos `uc  1 p 1 4 ]
+"131
+[v SetCursorPosition@secondLine secondLine `uc  1 a 1 6 ]
+"139
+} 0
+"124
+[v _SetDdramAddress SetDdramAddress `(v  1 e 1 0 ]
+{
+[v SetDdramAddress@addr addr `uc  1 a 1 wreg ]
+[v SetDdramAddress@addr addr `uc  1 a 1 wreg ]
+"126
+[v SetDdramAddress@addr addr `uc  1 a 1 3 ]
+"127
+} 0
+"119
+[v _MoveCursorToStart MoveCursorToStart `T(v  1 e 1 0 ]
+{
+"122
+} 0
+"172
 [v _Initialise Initialise `T(v  1 e 1 0 ]
 {
-"123
+"180
+} 0
+"104
+[v _ClearDisplay ClearDisplay `T(v  1 e 1 0 ]
+{
+"107
+} 0
+"82
+[v _WriteCommand WriteCommand `T(v  1 e 1 0 ]
+{
+[v WriteCommand@cmd cmd `uc  1 a 1 wreg ]
+[v WriteCommand@cmd cmd `uc  1 a 1 wreg ]
+"84
+[v WriteCommand@cmd cmd `uc  1 a 1 2 ]
+"92
+} 0
+"80
+[v _delay delay `(v  1 e 1 0 ]
+{
+[v delay@i i `i  1 a 2 0 ]
 } 0
